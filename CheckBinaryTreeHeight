@@ -1,0 +1,41 @@
+#include <iostream>
+#include <cmath>
+
+class TreeNode {
+public:
+    int val;
+    TreeNode* left;
+    TreeNode* right;
+    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+};
+
+class Solution {
+public:
+    int height(TreeNode* root) {
+        if (root == nullptr)
+            return 0;
+
+        int leftHeight = height(root->left);
+        int rightHeight = height(root->right);
+
+        return std::max(leftHeight, rightHeight) + 1;
+    }
+};
+
+int main() {
+    // Example 1
+    TreeNode* root1 = new TreeNode(1);
+    root1->left = new TreeNode(2);
+    root1->right = new TreeNode(3);
+    Solution sol1;
+    std::cout << "Example 1: " << sol1.height(root1) << std::endl;
+
+    // Example 2
+    TreeNode* root2 = new TreeNode(2);
+    root2->right = new TreeNode(1);
+    root2->right->left = new TreeNode(3);
+    Solution sol2;
+    std::cout << "Example 2: " << sol2.height(root2) << std::endl;
+
+    return 0;
+}
